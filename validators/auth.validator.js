@@ -13,3 +13,5 @@ const Schema = {
         location: joi.string().required()
     })
 }
+
+module.exports = Schema;
