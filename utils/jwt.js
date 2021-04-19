@@ -5,18 +5,12 @@ const redis = require('../connectors/redis')
 require('dotenv').config()
 
 const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET
-const accessTokenExpires = process.env.ACCESS_TOKEN_LIFE
-const refreshTokenExpires = process.env.REFRESH_TOKEN_LIFE
-const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET
-const issuer = process.env.TOKEN_ISSUER
 
 module.exports = {
 
     signAccessToken(payload){
         return new Promise((resolve, reject) => {
             jwt.sign({ payload }, accessTokenSecret, {
-                expiresIn: accessTokenExpires,
-                issuer, audience: payload.email
             }, (err, token) => {
                 if (err) {
                 reject(createError.InternalServerError())

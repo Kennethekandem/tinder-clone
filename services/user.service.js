@@ -3,7 +3,7 @@ const createError = require('http-errors')
 
 require('dotenv').config()
 
-// const jwt = require('../utils/jwt')
+const jwt = require('../utils/jwt')
 const bcrypt = require('bcryptjs')
 
 class userService {
@@ -23,6 +23,8 @@ class userService {
         const newUser = new User(data)
         const user = await newUser.save()
         delete data.password
+
+        data.accessToken = await jwt.signAccessToken(user)
 
         return data
 
@@ -45,9 +47,8 @@ class userService {
         delete user.password
 
         const accessToken = await jwt.signAccessToken(user)
-        const refreshToken = await jwt.signRefreshToken(user)
 
-        return { ...user, accessToken, refreshToken }
+        return { ...user, accessToken }
 
     }
 
