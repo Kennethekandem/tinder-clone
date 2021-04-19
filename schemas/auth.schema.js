@@ -11,6 +11,10 @@ const Schema = {
         age: joi.number().required(),
         gender: joi.string().required(),
         location: joi.string().required()
+    }),
+    login: joi.object().keys({
+        email: joi.string().email().required(),
+        password: joi.string().min(6).required()
     })
 }
 
