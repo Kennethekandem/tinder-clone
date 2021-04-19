@@ -1,5 +1,4 @@
 const router = require('express').Router;
-const validator = require('../validators/auth.validator');
-
+const schema = require('../schemas/auth.schema');
 
 module.exports = router;
