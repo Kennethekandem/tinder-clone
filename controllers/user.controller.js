@@ -43,10 +43,31 @@ class userController {
 
     static all = async (req, res, next) => {
 
+        let { id } = req.params;
         try {
+            let currentUser = await user.findUser(id);
+            let gender = currentUser.gender;
+
+            switch (gender) {
+                case 'M':
+                    gender = 'F';
+                    break;
+                case 'F':
+                    gender = 'M';
+                    break;
+                default:
+            }
+
+            let getUsers = await user.allUsers(gender);
+
+            res.status(200).json({
+                status: true,
+                message: "Account token successful refreshed",
+                data: getUsers
+            })
 
         } catch (e) {
-
+            next(createError(e.statusCode, e.message))
         }
     }
 

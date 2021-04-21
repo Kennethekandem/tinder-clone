@@ -52,6 +52,21 @@ class userService {
 
     }
 
+    static async findUser(id) {
+
+        const user = await User.findById(id)
+
+        if (!user) {
+            throw createError.NotFound('User not registered')
+        }
+
+        return user;
+    }
+
+    static async allUsers(gender) {
+        return User.find({gender});
+    }
+
 }
 
 module.exports = userService;
