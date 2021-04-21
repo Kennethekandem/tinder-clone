@@ -15,7 +15,8 @@ const schema = mongoose.Schema({
     },
     age: Number,
     gender: String,
-    location: String
+    location: String,
+    profile_photo: String
 })
 
 module.exports = mongoose.model("User", schema)

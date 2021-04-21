@@ -10,7 +10,10 @@ const Schema = {
         // Other requirements
         age: joi.number().required(),
         gender: joi.string().required(),
-        location: joi.string().required()
+        location: joi.string().required(),
+        file: {
+            profile_photo: joi.string().required()
+        }
     }),
     login: joi.object().keys({
         email: joi.string().email().required(),

@@ -1,11 +1,19 @@
 const user = require('../services/user.service')
 const createError = require('http-errors')
+const cloud = require("../utils/cloudinary");
 
 class userController {
 
     static register = async (req, res, next) => {
-
         try {
+
+            let uploadImages = req.file;
+            let profilePhotoCloud = await cloud.uploads(uploadImages.path);
+
+            if(profilePhotoCloud) {
+                req.body.profile_photo = profilePhotoCloud.url.replace('http', 'https');
+            }
+
             const data = await user.register(req.body)
             res.status(200).json({
                 status: true,
@@ -31,6 +39,15 @@ class userController {
             next(createError(e.statusCode, e.message))
         }
 
+    }
+
+    static all = async (req, res, next) => {
+
+        try {
+
+        } catch (e) {
+
+        }
     }
 
     static refreshToken = async (req, res, next) => {

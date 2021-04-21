@@ -6,5 +6,6 @@ const validator = require('../middlewares/validator');
 router.post('/register', validator(schema.register), user.register);
 router.post('/login', validator(schema.login), user.login);
 
+router.get('/users');
 
 module.exports = router;
