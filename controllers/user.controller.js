@@ -71,6 +71,14 @@ class userController {
         }
     }
 
+    static like = async (req, res, next) => {
+
+    }
+
+    static dislike = async (req, res, next) => {
+
+    }
+
     static refreshToken = async (req, res, next) => {
 
         const { refreshToken } = req.body;
