@@ -22,7 +22,7 @@ const Schema = {
     like: joi.object().keys({
         user_id: joi.string().required(),
         liked_id: joi.string().required(),
-        match: joi.string().required()
+        match: joi.number().required()
     }),
     dislike: joi.object().keys({
         user_id: joi.string().required(),

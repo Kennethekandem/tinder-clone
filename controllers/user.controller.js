@@ -74,14 +74,11 @@ class userController {
     static like = async (req, res, next) => {
 
         try {
-
             let check = await user.match(req.body);
 
             if(check) {
-                req.body.match = 1;
 
                 const like = await user.like(req.body);
-
                 return res.status(200).json({
                     status: true,
                     message: "It's a match",

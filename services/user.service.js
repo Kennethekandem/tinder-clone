@@ -73,9 +73,9 @@ class userService {
 
         const liked_user = await User.find({
             _id: liked_id,
-            like: {
+            likes: [{
                 user_id
-            }
+            }]
         });
 
         return true;
@@ -84,10 +84,18 @@ class userService {
     static async like(data) {
         const { user_id, liked_id, match } = data;
 
-        var condition = { _id : user_id }
+        let condition = { _id : user_id }
+        let likes = [];
+
+        let getUser = await User.findById(user_id);
+
+        if(getUser) {
+            likes = getUser._doc.likes;
+            likes.push(data);
+        }
 
         return User.findOneAndUpdate(condition, {
-            data
+            likes
         });
     }
 
