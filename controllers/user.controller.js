@@ -137,6 +137,23 @@ class userController {
 
     }
 
+    static single = async (req, res, next) => {
+        let { id } = req.params;
+
+        try {
+            let currentUser = await user.findUser(id);
+
+            return res.status(200).json({
+                status: true,
+                message: "User details",
+                data: currentUser
+            })
+        }
+        catch (e) {
+            next(createError(e.statusCode, e.message))
+        }
+    }
+
     static refreshToken = async (req, res, next) => {
 
         const { refreshToken } = req.body;
