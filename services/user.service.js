@@ -69,16 +69,13 @@ class userService {
 
     static async match(data) {
 
-        const { user_id, liked_id, match } = data;
+        const { user_id, liked_id } = data;
 
-        const liked_user = await User.find({
+        return User.find({
             _id: liked_id,
-            likes: [{
-                user_id
-            }]
+            "likes.liked_id": user_id
         });
 
-        return true;
     }
 
     static async like(data) {
@@ -94,10 +91,30 @@ class userService {
             likes.push(data);
         }
 
-        return User.findOneAndUpdate(condition, {
+        let update = await User.findOneAndUpdate(condition, {
             likes
         });
+
+        let secondCondition = {_id : liked_id, 'likes.user_id': liked_id};
+        if(update) {
+            if(match === 1) {
+                console.log(match);
+                let updateLiked = await User.findOneAndUpdate(secondCondition, {
+                    $set:  {'likes.$': { match: 1 }}
+                },
+                    { new: true });
+
+                if(updateLiked) {
+                    return update;
+                }
+            }
+        }
+        return update
     }
+
+    /*static async match() {
+
+    }*/
 
 }
 

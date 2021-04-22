@@ -71,28 +71,35 @@ class userController {
         }
     }
 
+    static matches = async (req, res, next) => {
+
+    }
+
     static like = async (req, res, next) => {
 
         try {
             let check = await user.match(req.body);
 
-            if(check) {
+            if(check && !check.length) {
 
                 const like = await user.like(req.body);
+
                 return res.status(200).json({
                     status: true,
-                    message: "It's a match",
+                    message: "Liked",
                     data: like
                 })
+
             }
 
+            req.body.match = 1;
             const like = await user.like(req.body);
-
-            res.status(200).json({
+            return res.status(200).json({
                 status: true,
-                message: "Liked",
+                message: "It's a match",
                 data: like
             })
+
         }
         catch (e) {
             next(createError(e.statusCode, e.message))
