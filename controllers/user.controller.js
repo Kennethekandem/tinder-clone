@@ -72,7 +72,34 @@ class userController {
     }
 
     static matches = async (req, res, next) => {
+        let { id } = req.params;
 
+        let u = [];
+        let final = [];
+        let getUser = await user.findUser(id);
+        u.push(getUser)
+
+        if(u) {
+            let matches = u.map((object, index) => {
+                let newLikes = []
+                let likes = object.likes;
+
+                likes.map(like => {
+                    if(like.match === '1') {
+                        newLikes.push(like);
+                    }
+                });
+
+                object.likes = newLikes;
+                final.push(object);
+            });
+
+            return res.status(200).json({
+                status: true,
+                message: "Liked",
+                data: final
+            })
+        }
     }
 
     static like = async (req, res, next) => {

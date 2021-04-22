@@ -98,9 +98,13 @@ class userService {
         let secondCondition = {_id : liked_id, 'likes.user_id': liked_id};
         if(update) {
             if(match === 1) {
-                console.log(match);
+
                 let updateLiked = await User.findOneAndUpdate(secondCondition, {
-                    $set:  {'likes.$': { match: 1 }}
+                    $set:  {'likes.$': {
+                        user_id: liked_id,
+                        liked_id: user_id,
+                        match: 1
+                    }}
                 },
                     { new: true });
 
@@ -111,10 +115,6 @@ class userService {
         }
         return update
     }
-
-    /*static async match() {
-
-    }*/
 
 }
 

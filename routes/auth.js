@@ -11,4 +11,6 @@ router.get('/all/:id', user.all);
 router.post('/like', validator(schema.like), user.like);
 router.post('/dislike', validator(schema.dislike), user.like);
 
+router.get('/matches/:id', user.matches);
+
 module.exports = router;
