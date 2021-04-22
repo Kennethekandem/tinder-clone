@@ -18,7 +18,16 @@ const Schema = {
     login: joi.object().keys({
         email: joi.string().email().required(),
         password: joi.string().min(6).required()
-    })
+    }),
+    like: joi.object().keys({
+        user_id: joi.string().required(),
+        liked_id: joi.string().required(),
+        match: joi.string().required()
+    }),
+    dislike: joi.object().keys({
+        user_id: joi.string().required(),
+        disliked_id: joi.string().required()
+    }),
 }
 
 module.exports = Schema;

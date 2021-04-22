@@ -8,6 +8,7 @@ router.post('/login', validator(schema.login), user.login);
 
 router.get('/all/:id', user.all);
 
-// router.post('/like')
+router.post('/like', validator(schema.like), user.like);
+router.post('/dislike', validator(schema.dislike), user.like);
 
 module.exports = router;
