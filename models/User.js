@@ -16,7 +16,12 @@ const schema = mongoose.Schema({
     age: Number,
     gender: String,
     location: String,
-    profile_photo: String
+    profile_photo: String,
+    like: {
+        user_id: { type: String },
+        liked_id: { type: String },
+        match: { type: String }
+    }
 })
 
 module.exports = mongoose.model("User", schema)

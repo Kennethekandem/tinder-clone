@@ -67,6 +67,30 @@ class userService {
         return User.find({gender});
     }
 
+    static async match(data) {
+
+        const { user_id, liked_id, match } = data;
+
+        const liked_user = await User.find({
+            _id: liked_id,
+            like: {
+                user_id
+            }
+        });
+
+        return true;
+    }
+
+    static async like(data) {
+        const { user_id, liked_id, match } = data;
+
+        var condition = { _id : user_id }
+
+        return User.findOneAndUpdate(condition, {
+            data
+        });
+    }
+
 }
 
 module.exports = userService;
