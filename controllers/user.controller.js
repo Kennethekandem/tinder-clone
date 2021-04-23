@@ -59,11 +59,25 @@ class userController {
             }
 
             let getUsers = await user.allUsers(gender);
+            let users = [];
 
+            if(getUsers) {
+                getUsers.map((user, index) => {
+                    let likes = user.likes;
+
+                    let getNotLiked = likes.filter(obj => obj.liked_id !== user._id);
+
+
+                    if(getNotLiked) {
+                        users.push(user);
+                    }
+
+                })
+            }
             res.status(200).json({
                 status: true,
                 message: "Account token successful refreshed",
-                data: getUsers
+                data: users
             })
 
         } catch (e) {
