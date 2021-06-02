@@ -17,7 +17,7 @@ const Schema = {
     }),
     login: joi.object().keys({
         email: joi.string().email().required(),
-        password: joi.string().min(6).required()
+        password: joi.string().min(6).required() 
     }),
     like: joi.object().keys({
         user_id: joi.string().required(),

@@ -20,6 +20,7 @@ class userController {
                 message: "Account successfully created",
                 data
             })
+            
         } catch (e) {
             next(createError(e.statusCode, e.message))
         }
